@@ -1,7 +1,4 @@
 import os
-import shutil
-
-print (os.getcwd())
 
 #get current working directory
 cwd = os.getcwd()
@@ -37,38 +34,29 @@ imageExt = ['ai','bmp','gif','ico','jpeg','png','ps','jpg','psd','svg','tif','ti
 #list of all program extension
 programExt = ['apk','bat','bin','cgi','pl','com','exe','gadget','jar','msi','py','wsf']
 
-#loop throug all the files in current directory
+#function to move file
+def moveFile(dir):
+    oldPath = os.path.join(cwd, file)
+    newPath = os.path.join(cwd, dir, file)
+    os.replace(oldPath, newPath)
+
+#loop through all the files in current directory
 for file in files:
     fileExtension = file.split(".")
     if len(fileExtension) >= 2 :
-        print (fileExtension[len(fileExtension) - 1])
         fileExtension = fileExtension[len(fileExtension) - 1]
         if file != 'fileOrganizer.py':
             if fileExtension in audioExt:
-                oldPath = os.path.join(cwd, file)
-                newPath = os.path.join(cwd, "Audio", file)
-                os.replace(oldPath, newPath)
+                moveFile("Audio")
             elif fileExtension in imageExt:
-                oldPath = os.path.join(cwd, file)
-                newPath = os.path.join(cwd, "Images", file)
-                os.replace(oldPath, newPath)
+                moveFile("Images")
             elif fileExtension in videoExt:
-                oldPath = os.path.join(cwd, file)
-                newPath = os.path.join(cwd, "Videos", file)
-                os.replace(oldPath, newPath)
+                moveFile("Videos")
             elif fileExtension in compressedExt:
-                oldPath = os.path.join(cwd, file)
-                newPath = os.path.join(cwd, "Compressed", file)
-                os.replace(oldPath, newPath)
+                moveFile("Compressed")
             elif fileExtension in programExt:
-                oldPath = os.path.join(cwd, file)
-                newPath = os.path.join(cwd, "Programs", file)
-                os.replace(oldPath, newPath)
+                moveFile("Programs")
             elif fileExtension in documentsExt:
-                oldPath = os.path.join(cwd, file)
-                newPath = os.path.join(cwd, "Documents", file)
-                os.replace(oldPath, newPath)
+                moveFile("Documents")
             else:
-                oldPath = os.path.join(cwd, file)
-                newPath = os.path.join(cwd, "Other", file)
-                os.replace(oldPath, newPath)
+                moveFile("Other")
